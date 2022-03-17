@@ -2,11 +2,36 @@
   "name": "proyecto",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./app/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development --open",
+    "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Manuel Ballinas Kramsky",
+  "license": "ISC",
+  "dependencies": {
+    "html-webpack-plugin": "^5.3.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "reactstrap": "^8.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-jsx-control-statements": "^4.1.0",
+    "css-loader": "^5.2.6",
+    "file-loader": "^6.2.0",
+    "immutability-helper": "^3.1.1",
+    "jsx-control-statements": "^3.2.8",
+    "path": "^0.12.7",
+    "react-hot-loader": "^4.13.0",
+    "style-loader": "^3.0.0",
+    "webpack": "^5.40.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^4.7.4"
+  }
 }
