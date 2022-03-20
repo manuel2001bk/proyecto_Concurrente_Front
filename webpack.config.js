@@ -47,7 +47,7 @@ module.exports = {
         })
     ],
     devServer: {
-        historyApiFallback : true,
+        historyApiFallback: true,
         compress: true,
         port: 8000,
     }

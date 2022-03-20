@@ -3,21 +3,21 @@ import css from "../assets/css/Register.css";
 import update from "immutability-helper";
 
 
-class Register extends React.Component{
+class Register extends React.Component {
     constructor() {
         super();
-        this.state= {
+        this.state = {
             nombre: '',
             apellido: '',
-            userName:'',
-            password:''
+            userName: '',
+            password: ''
         }
 
     }
     componentDidMount() {
-        if(window.localStorage.getItem('token')){
+        if (window.localStorage.getItem('token')) {
             alert("Para continuar cierre la sesión actual")
-        }else {
+        } else {
 
         }
     }
@@ -28,11 +28,11 @@ class Register extends React.Component{
         let value = e.target.value
 
         this.setState(update(this.state, {
-            [field] : {$set : value}
+            [field]: { $set: value }
         }))
     }
 
-    usernameValidate(e){
+    usernameValidate(e) {
         let userName = this.state.userName
         if (userName) {
             this.username.innerHTML = '* El nombre de usuario no está disponible'
@@ -41,13 +41,13 @@ class Register extends React.Component{
             this.usernameOk = false
     }
 
-    validarCampos(){
+    validarCampos() {
         let estado = true;
 
         if (this.state.nombre.length === 0) {
             this.nombre.innerHTML = '* Campo obligatorio'
             estado = false;
-        } else{
+        } else {
             this.nombre.innerHTML = ''
         }
 
@@ -75,7 +75,7 @@ class Register extends React.Component{
 
     }
 
-    crearCuenta(e){
+    crearCuenta(e) {
         this.messageError.innerHTML = ''
         this.validarCampos()
 
@@ -105,59 +105,59 @@ class Register extends React.Component{
                             <form action="" method="">
                                 <div className="form-floating">
                                     <input className="form-control"
-                                           type="text"
-                                           name="nombre"
-                                           id="nombre"
-                                           placeholder="Manuel"
-                                           value={this.state.nombre}
-                                           onChange={this.changeField.bind(this)}/>
+                                        type="text"
+                                        name="nombre"
+                                        id="nombre"
+                                        placeholder="Manuel"
+                                        value={this.state.nombre}
+                                        onChange={this.changeField.bind(this)} />
                                     <label htmlFor="Nombre">Nombre</label>
                                 </div>
-                                <label ref={self=> this.nombre = self}
-                                       className="form-text text-danger"></label>
+                                <label ref={self => this.nombre = self}
+                                    className="form-text text-danger"></label>
                                 <div className="form-floating">
                                     <input className="form-control"
-                                           type="text"
-                                           name="apellido"
-                                           id="apellido"
-                                           placeholder="Ballinas"
-                                           value={this.state.apellido}
-                                           onChange={this.changeField.bind(this)}/>
+                                        type="text"
+                                        name="apellido"
+                                        id="apellido"
+                                        placeholder="Ballinas"
+                                        value={this.state.apellido}
+                                        onChange={this.changeField.bind(this)} />
                                     <label htmlFor="apellido">Apellido</label>
                                 </div>
-                                <label ref={self=> this.apellido = self}
-                                       className="form-text text-danger"></label>
-                                <br/>
+                                <label ref={self => this.apellido = self}
+                                    className="form-text text-danger"></label>
+                                <br />
                                 <div className="form-floating">
                                     <input className="form-control"
-                                           type="text"
-                                           name="userName"
-                                           id="userName"
-                                           placeholder="manu"
-                                           value={this.state.username}
-                                           onChange={this.changeField.bind(this)}
-                                           onBlur={this.usernameValidate.bind(this)}/>
+                                        type="text"
+                                        name="userName"
+                                        id="userName"
+                                        placeholder="manu"
+                                        value={this.state.username}
+                                        onChange={this.changeField.bind(this)}
+                                        onBlur={this.usernameValidate.bind(this)} />
                                     <label htmlFor="username">UserName</label>
                                 </div>
-                                <label ref={self=> this.username = self}
-                                       className="form-text text-danger"></label>
-                                <br/>
+                                <label ref={self => this.username = self}
+                                    className="form-text text-danger"></label>
+                                <br />
                                 <div className="form-floating">
                                     <input className="form-control"
-                                           type="password"
-                                           name="password"
-                                           id="password"
-                                           placeholder="1234"
-                                           value={this.state.password}
-                                           onChange={this.changeField.bind(this)}/>
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="1234"
+                                        value={this.state.password}
+                                        onChange={this.changeField.bind(this)} />
                                     <label htmlFor="password">Contraseña</label>
                                 </div>
-                                <label ref={self=> this.password = self}
-                                       className="form-text text-danger"></label>
+                                <label ref={self => this.password = self}
+                                    className="form-text text-danger"></label>
                                 <div className="d-grid gap-2">
                                     <button className="btn btn-outline-success"
-                                            type="button"
-                                            onClick={this.crearCuenta.bind(this)}>Registrar
+                                        type="button"
+                                        onClick={this.crearCuenta.bind(this)}>Registrar
                                     </button>
                                 </div>
                                 <div ref={self => this.messageError = self}></div>
