@@ -1,5 +1,7 @@
 import React from 'react';
 import update from "immutability-helper";
+import APIInvoker from "../utils/APIInvoker";
+import avatar from "../assets/images/iniciar-sesion.png"
 
 
 //css
@@ -14,6 +16,12 @@ class Login extends React.Component {
             password: ''
         }
     }
+    componentDidMount() {
+        if(window.localStorage.getItem('token')){
+            alert("Sesión ya iniciada")
+            this.props.history.push('/')
+        }
+    }
     changeField(e) {
         let field = e.target.name
         let value = e.target.value
@@ -21,25 +29,41 @@ class Login extends React.Component {
             [field]: { $set: value }
         }))
     }
-    usernameValidate(e) {
+    usernameValidate(e){
         let username = this.state.username
         if (this.state.username.length === 0) {
             this.label.innerHTML = '* Campo obligatorio'
         }
+        APIInvoker.invokeGET(`/users/usernameValidate/${username}`,
+            data => {
+                this.label.innerHTML = ""
+            },
+            error => {
+                this.label.innerHTML = "El usuario no existe."
+            })
     }
-    iniciarSesion(e) {
+
+    iniciarSesion(e){
         //Signup
         if (this.state.username.length === 0) {
             this.label.innerHTML = '* Campo obligatorio'
-        } else {
-            if (this.state.password.length === 0) {
+        }else{
+            if (this.state.password.length === 0){
                 this.pass.innerHTML = '* Campo obligatorio'
-            } else {
+            }else{
                 let user = {
                     userName: this.state.username,
                     password: this.state.password
                 }
-                console.log(user)
+                APIInvoker.invokePOST('/users/login',user, data => {
+                    //alert(data.message)
+                    window.localStorage.setItem('token', data.token)
+                    this.props.history.push('/')
+                }, error => {
+                    //alert(error.message)
+                    this.pass.innerHTML = error.message
+                })
+                e.preventDefault();
             }
         }
     }
@@ -49,7 +73,7 @@ class Login extends React.Component {
                 <div className="container">
                     <div className="login-container">
                         <div id="output"></div>
-                        <div className="avatar"></div>
+                        <img src={avatar} className="avatar"/>
                         <div className="form-box">
                             <form action="" method="">
                                 <div className="form-floating mb-3">
@@ -87,8 +111,14 @@ class Login extends React.Component {
                                     </button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
+                </div>
+                <div className="mt-4 text-center">
+                    <h4 className="font-size-20">Aun no tienes una cuenta?</h4>
+                    <p><a href="/Register"
+                          className="btn btn btn-outline-dark btn-sm"> Registrese ahora </a></p>
                 </div>
             </div>
         )
