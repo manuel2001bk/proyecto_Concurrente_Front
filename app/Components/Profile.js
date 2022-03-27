@@ -2,22 +2,17 @@ import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 
-import css from "../assets/css/Profile.css"
-
-import imagen_fondo from "../assets/images/fondo-colores.jpg"
-
-
 class Profile extends React.Component {
     constructor() {
         super();
+        this.state ={
+            files : ''
+        }
     }
     componentDidMount() {
         if(!window.localStorage.getItem('token')){
             this.props.history.push('/Login')
         }
-    }
-    enviar (e) {
-        console.log("Enviado")
     }
     render() {
         return (
@@ -31,13 +26,11 @@ class Profile extends React.Component {
                                 <div className="col-8">
                                     <h1>Bienvenido al sistema de gestion de fotos.</h1>
                                     <p>Ingresa las fotos que desea ingresar</p>
-                                    <form>
-                                        <input type="file" id="files" name="files" multiple />
-                                        <div className="d-grid gap-3 mt-4">
-                                            <button className="btn btn-outline-success btn-block waves-effect waves-light"
-                                                    type="button"
-                                                    onClick={this.enviar.bind(this)}>enviar
-                                            </button>
+                                    <form action="http://localhost:3000/images/upload" encType="multipart/form-data" method="post">
+                                        <div className="form-group d-grid gap-3 mt-4">
+                                            <input type="file" className="form-control-file" name="files" multiple/>
+                                            <input type="submit" value="Enviar imagenes"
+                                                   className="btn btn-outline-success btn-block waves-effect waves-light"/>
                                         </div>
                                     </form>
                                 </div>
@@ -47,7 +40,6 @@ class Profile extends React.Component {
                 </div>
                 <Footer/>
             </div>
-
         )
     }
 }

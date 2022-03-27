@@ -41,7 +41,6 @@ class APIInvoker {
             headers: this.getAPIHeader(),
             body: JSON.stringify(body)
         }
-
         this.invoke(url,okCallbak,failCallback,params)
     }
 
